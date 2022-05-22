@@ -1,26 +1,65 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+
+    <div class="col">
+      <ark-card>
+        <template #default>
+          <Gacha :callback="callback"/>
+        </template>
+      </ark-card>
+    </div>
+
+    <div class="col">
+      <ark-card>
+        <template #default>
+          <GachaRegister></GachaRegister>
+        </template>
+      </ark-card>
+
+      <ark-card>
+        <template #default>
+          <GachaStatistic :key="uid" :uid="uid"/>
+        </template>
+      </ark-card>
+    </div>
+
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
+import Gacha from "@/components/gacha/Gacha";
+import ArkCard from "@/components/ui/ArkCard";
+import GachaRegister from "@/components/gacha/GachaRegister";
+import GachaStatistic from "@/components/gacha/GachaStatistic";
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    GachaStatistic,
+    GachaRegister,
+    ArkCard,
+    Gacha,
+  },
+  data(){
+    return{
+      uid: undefined,
+    }
+  },
+  methods:{
+    callback(uid){
+      //console.log(doc)
+      this.uid=uid
+      //this.title=doc.nickName
+    }
+  },
 }
+document.title="ArkNights Gacha Statistic"
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  .col{
+    float: left;
+    min-width: 580px;
+    max-width: 50%;
+  }
 </style>
