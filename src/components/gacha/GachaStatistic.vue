@@ -57,7 +57,7 @@
             },
         },
         mounted() {
-            axios.get('https://www.moles.top/api/ark/statistic',{
+            axios.get('/api/ark/statistic',{
                 params: {
                     uid: this.uid,
                 }
