@@ -8,4 +8,13 @@ module.exports = {
   transpileDependencies: [
     'quasar'
   ],
+  devServer: {
+    host: 'localhost',
+    proxy: {
+      '/api': {
+        target: 'https://www.moles.top/',
+        changeOrigin: true,
+      }
+    }
+  }
 }

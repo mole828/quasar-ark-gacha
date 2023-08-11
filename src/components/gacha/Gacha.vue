@@ -107,7 +107,7 @@
         },
         methods: {
             initUsers(){
-                axios.get('https://www.moles.top/api/ark/list.doc').then(res=>{
+                axios.get('/api/ark/list.doc').then(res=>{
                     // this.docs=res.data
                     this.docs.push({
                         label: '全部',
@@ -124,7 +124,7 @@
                 })
             },
             ga(page,uid){
-                axios.get('https://www.moles.top/api/ark/gacha',{
+                axios.get('/api/ark/gacha',{
                     params: {
                         page,
                         uid,

@@ -39,7 +39,7 @@
                     console.log(e)
                     if(lock)return
                     lock = true
-                    axios.post('https://www.moles.top/api/ark/register',null ,{
+                    axios.post('/api/ark/register',null ,{
                         params:{
                             token: e
                         }
@@ -51,7 +51,7 @@
                 }
             })(),
             initInvalid(){
-                axios.get('https://www.moles.top/api/ark/doc.invalid').then(res=>{
+                axios.get('/api/ark/doc.invalid').then(res=>{
                     this.invalid = res.data
                 })
             },
