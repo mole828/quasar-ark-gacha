@@ -107,7 +107,7 @@
         },
         methods: {
             initUsers(){
-                axios.get('/api/ark/list.doc').then(res=>{
+                axios.get('/api/ark/users').then(res=>{
                     // this.docs=res.data
                     this.docs.push({
                         label: '全部',
@@ -124,13 +124,13 @@
                 })
             },
             ga(page,uid){
-                axios.get('/api/ark/gacha',{
+                axios.get('/api/ark/gachas',{
                     params: {
                         page,
                         uid,
                     }
                 }).then(res=>{
-                    //console.log(res)
+                    console.log(res)
                     this.gachas=res.data.data.list
                     this.pagination=res.data.data.pagination
                 })

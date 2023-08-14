@@ -9807,6 +9807,7 @@ __metadata:
     echarts: ^5.3.2
     eslint: ^6.7.2
     eslint-plugin-vue: ^7.0.0
+    lodash: ^4.17.21
     quasar: ^2.0.0
     vue: ^3.0.0
     vue-cli-plugin-quasar: ~5.0.1

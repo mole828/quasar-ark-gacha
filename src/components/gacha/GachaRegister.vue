@@ -51,7 +51,7 @@
                 }
             })(),
             initInvalid(){
-                axios.get('/api/ark/doc.invalid').then(res=>{
+                axios.get('/api/ark/users.invalid').then(res=>{
                     this.invalid = res.data
                 })
             },

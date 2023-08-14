@@ -1,20 +1,21 @@
 module.exports = {
   pluginOptions: {
     quasar: {
-      importStrategy: 'kebab',
-      rtlSupport: false
-    }
+      importStrategy: "kebab",
+      rtlSupport: false,
+    },
   },
-  transpileDependencies: [
-    'quasar'
-  ],
+  transpileDependencies: ["quasar"],
   devServer: {
-    host: 'localhost',
     proxy: {
-      '/api': {
-        target: 'https://www.moles.top/',
+      "/api": {
+        target: "https://www.moles.top/",
+        // target: "http://localhost:8000/",
         changeOrigin: true,
-      }
-    }
-  }
-}
+        pathRewrite: {
+          // "^/api/ark": "/",
+        },
+      },
+    },
+  },
+};
