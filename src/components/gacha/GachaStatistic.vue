@@ -1,11 +1,11 @@
 <template>
     <div>
-        <div id="main" style="width: 480px; height: 300px;"></div>
+        <div :id="`chart-${uid}`" style="width: 480px; height: 300px;"></div>
         <div v-if="Object.keys(analysis).length > 0 && analysis.user.uid != ''">
-            <h5>限定池:</h5>
+            <h5 style="margin: auto;">限定池:</h5>
             <a>
                 博士抽了 {{ analysis.hasDraw.limited }} 抽都没出，
-                连 {{ ten }}%
+                连 {{ once }}%
                 这么小的概率都能撞上，果然是杂鱼啊
             </a>
             <br>
@@ -19,12 +19,6 @@
         </div>
     </div>
 </template>
-
-<style>
-h5 {
-    margin: 0;
-}
-</style>
 
 <script>
 // 引入echarts
@@ -64,10 +58,8 @@ function once_probability(ds) {
 
 function cumulative_probability(ds) {
     let not_cumulative_probability = 1;
-    let d = 0;
-    while (d < ds) {
+    for (let d = 0; d<ds; d++){
         not_cumulative_probability *= 1 - once_probability(d);
-        d += 1;
     }
     return 1 - not_cumulative_probability
 }
@@ -89,7 +81,7 @@ export default {
     methods: {
         initChart() {
             // 需要获取到element,所以是onMounted的Hook
-            let chartDom = document.getElementById('main');
+            let chartDom = document.getElementById(`chart-${this.uid}`);
             let myChart = echarts.init(chartDom);
             let option;
             option = {
@@ -126,6 +118,7 @@ export default {
         },
     },
     mounted() {
+        console.log("anal mounted")
         axios.get('/api/ark/analysis', {
             params: {
                 uid: this.uid,
@@ -136,9 +129,8 @@ export default {
             this.analysis = res.data
             let sum = 0;
             Object.values(summary).forEach(v => sum += v)
-            console.log(sum)
+            console.log(summary)
             for (let rarity in summary) {
-                console.log(rarity, summary[rarity])
                 let per = Number((summary[rarity] / sum) * 100).toFixed(2);
                 this.data.push({
                     name: String(Number(rarity) + 1) + '星 ' + per + '%',
@@ -150,6 +142,9 @@ export default {
 
     },
     computed: {
+        once: function () {
+            return ((1-cumulative_probability(this.analysis.hasDraw.limited))*100).toFixed(2)
+        },
         ten: function () {
             return Number(
                 (1 - (1 - cumulative_probability(this.analysis.hasDraw.limited + 10)) / (1 - cumulative_probability(this.analysis.hasDraw.limited))) * 100
