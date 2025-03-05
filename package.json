@@ -14,7 +14,7 @@
     "core-js": "^3.6.5",
     "echarts": "^5.3.2",
     "lodash": "^4.17.21",
-    "quasar": "^2.0.0",
+    "quasar": "2.0.0",
     "vue": "^3.0.0"
   },
   "devDependencies": {

@@ -9,11 +9,11 @@ module.exports = {
   devServer: {
     proxy: {
       "/api": {
-        target: "https://www.moles.top/",
-        // target: "http://localhost:8000/",
+        // target: "https://www.moles.top/",
+        target: "http://localhost:8080/",
         changeOrigin: true,
         pathRewrite: {
-          // "^/api/ark": "/",
+          "^/api/ark": "/",
         },
       },
     },
